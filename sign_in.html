@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>Sign</title>
+        <style>
+            #app {
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            #problem {
+                font-size: 72px;
+            }
+
+            #winner {
+                font-size: 72px;
+                color: green;
+            }
+
+      
+            body{
+                background-image: url(sig.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            button:hover{
+                background-color: blue;
+                color: greenyellow;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" ></div>
+        <script type="text/babel">
+            class Sup extends React.Component {
+                render() {
+                    return (
+                        <div className="blue">
+                            <div id="sup">
+                                {this.props.name} Successfully Registered!!!
+                                
+                            </div>
+                            <a href="sign_up.html"><button>Log In</button></a>
+                        </div>
+                    );
+                }
+            }
+
+            class App extends React.Component {
+
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        username:"",
+                        name:"",
+                        password:"",
+                        c:0
+                    };
+                }
+
+                render() {
+                    if (this.state.c === 0) {
+                        return this.renderSP();
+                    } else {
+                        return this.renderSUP();
+                    }
+                }
+
+                renderSP() {
+                    return (
+                        <div>
+                            <div className = "input-control">
+                                    <h3 className="blue">Username</h3>
+                                    <input onChange={this.readusername} name="un" type="text" autoComplete="off" placeholder="Enter your Username" value={this.state.un}></input>
+                                    <h3 className="blue">Name</h3>
+                                    <input onChange={this.readname} name="na" type="text" autoComplete="off" placeholder="Enter your name" value={this.state.na}></input>
+                                    <h3 className="blue">Password</h3>
+                                    <input onChange={this.readpassword} name="ps" type="password" autoComplete="off" placeholder="Enter your Password" value={this.state.ps}></input>
+
+                                    <pre>            </pre>
+                                    <button onClick={this.success} id="up">Create Account</button>
+                                    <a href="sign_up.html"><button id="in">Sign Up</button></a>
+                                </div>
+                            </div>
+                    );
+                }
+
+                renderSUP() {
+                    const name = this.state.un;
+                    return (
+                        <Sup name={name} />
+                    );
+                }
+
+                readusername=(ele)=>{
+                    this.setState({[ele.target.name]:ele.target.value});
+                }
+                readpassword=(ele1)=>{
+                    this.setState({[ele1.target.name]:ele1.target.value});
+                }
+                readname=(ele2)=>{
+                    this.setState({[ele2.target.name]:ele2.target.value});
+                }
+                
+                success=()=>{
+                    this.setState({c:1});
+                }
+                
+
+                
+            }
+
+            ReactDOM.render((
+                <div>
+                    <App />
+                </div>
+            ), document.querySelector("#app"));
+        </script>
+    </body>
+</html>
